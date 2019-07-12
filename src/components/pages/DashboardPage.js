@@ -294,7 +294,7 @@ class DashboardPage extends React.Component {
             <div className="row">
               <div className="col-md-12">
                 Select Type
-                <select placeholder="Select Type" name="type" id="type" value={this.state.data.type} onChange={this.handleSelectChange}>
+                <select className="form-control" style={{ width: "29rem" }} placeholder="Select Type" name="type" id="type" value={this.state.data.type} onChange={this.handleSelectChange}>
                   <option value="arrival">Arrival</option>
                   <option value="departure">Departure</option>
                 </select>
@@ -302,9 +302,10 @@ class DashboardPage extends React.Component {
 
                   <div className="col-md-6">
                     Select Start Date
-                    <DatePicker
+                      <DatePicker
                       selected={this.state.data.startDate}
                       onChange={this.handleDateChange} //only when value has changed
+
                     />
                   </div>
 
