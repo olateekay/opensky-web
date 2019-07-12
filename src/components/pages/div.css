@@ -1,0 +1,8 @@
+.flights {
+    background-color: #ededff;
+    padding: 3px;
+    width: 30rem;
+    max-height: 250px;
+    overflow: auto;
+    border-radius: 5%
+}
