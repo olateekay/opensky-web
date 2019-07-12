@@ -1,8 +1,8 @@
 {
-  "name": "mdb-react-admin-template",
+  "name": "opensky-web",
   "version": "1.0.0",
-  "description": "MDB - React Admin Dashboard Free",
-  "author": "MDBootstrap <support@mdbootstrap.com>",
+  "description": "Open sky-web sample",
+  "author": "Olatokunbo",
   "license": "MIT",
   "dependencies": {
     "axios": "^0.19.0",
