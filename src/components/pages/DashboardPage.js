@@ -32,13 +32,56 @@ class DashboardPage extends React.Component {
           },
         },
         {
+          header: "FRANCE",
+          airports: {
+            name: "Paris Charles de Gaulle Airport",
+            code: "LFPG"
+          }
+
+        },
+
+        {
+          header: "TURKEY",
+          airports: {
+            name: "Istanbul's Atatürk International Airport",
+            code: "LTBA"
+          }
+
+        },
+        {
+          header: "SOUTH KOREA",
+          airports: {
+            name: "Seoul's Incheon International Airport",
+            code: "RKSI"
+          }
+
+        },
+        {
           header: "CHINA",
           airports: {
             name: "Beijing Capital International Airport",
             code: "ZBAA"
           }
-          ,
         },
+        {
+          header: "SOUTH AFRICA",
+          airports: {
+            name: "Cape town international airport",
+            code: "FACT"
+          }
+
+        },
+
+        {
+          header: "INDIA",
+          airports: {
+            name: "New Delhi's Indira Gandhi International Airport",
+            code: "VIDP"
+          }
+
+        },
+
+
         {
           header: "DUBAI",
           airports: {
@@ -48,14 +91,6 @@ class DashboardPage extends React.Component {
 
         },
         {
-          header: "JAPAN",
-          airports: {
-            name: "Tokyo's Haneda Airport",
-            code: "RJIT"
-          },
-        }
-        ,
-        {
           header: "OMAN",
           airports: {
             name: "Muscat International Airport",
@@ -63,13 +98,13 @@ class DashboardPage extends React.Component {
           },
         },
         {
-          header: "INDIA",
+          header: "JAPAN",
           airports: {
-            name: "New Delhi's Indira Gandhi International Airport",
-            code: "VIDP"
-          }
-
+            name: "Tokyo's Haneda Airport",
+            code: "RJIT"
+          },
         }
+
       ]
     }
   }
