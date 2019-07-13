@@ -275,8 +275,8 @@ class DashboardPage extends React.Component {
       <React.Fragment>
         {/* <BreadcrumSection /> */}
         <div class="w3-top">
-          <div class="w3-bar w3-red">
-            <Link to={"/"} class="w3-bar-item w3-button">DashboardPage</Link>
+          <div class="w3-bar w3-black">
+            <Link to={"/"} class="w3-bar-item w3-button">Wellcome to Opensky</Link>
           </div>
         </div>
         <br />
@@ -353,14 +353,10 @@ class DashboardPage extends React.Component {
           </Modal.Body>
           <Modal.Footer>
 
-            <Button variant="secondary" onClick={this.handleClose}>
+            <Button variant="primary" onClick={this.handleClose}>
               Close
 </Button>
-            <Button
-              variant="primary"
-            >
-              Okay
-</Button>
+
           </Modal.Footer>
         </Modal>
       </React.Fragment>

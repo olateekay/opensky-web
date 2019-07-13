@@ -1,6 +1,5 @@
 import React from 'react';
 import { MDBRow } from 'mdbreact';
-
 import './cards.css'
 import './style.css'
 class LoginPage extends React.Component {
@@ -46,44 +45,41 @@ class LoginPage extends React.Component {
 
   render() {
     return (
-      <div>
 
-        <center>
-          <div class="card-body px-lg-5 pt-0">
+      <center>
+        <div class="card-body px-lg-5 pt-0">
+          <div class="card" style={{ height: "100%", textAlign: "left", marginTop: "15rem", padding: "3rem" }}>
+            <div class="card-block">
 
+              {/* <div class="form-header darken-4">
+                <h3>Login</h3>
+              </div> */}
 
-            <div class="card" style={{ height: "100%", textAlign: "left", marginTop: "15rem", padding: "3rem" }}>
-              <div class="card-block">
-
-                <div class="form-header darken-4">
-                  <h3> Login:</h3>
-                </div>
-
-                <div class="md-form">
-                  <i class="fa fa-envelope prefix"></i>
-                  <input placeholder="Email" type="text" id="form2" name="email" onChange={this.handleInputChange} class="form-control"></input>
-                </div>
-
-                <div class="md-form">
-                  <i class="fa fa-lock prefix"></i>
-                  <input placeholder="Password" type="password" name="password" id="form4" onChange={this.handleInputChange} class="form-control"></input>
-                </div>
-
-                {this.state.showError &&
-                  <div style={{ textAlign: "center" }}>
-                    <label style={{ color: "red" }}>{this.state.ErrorValue}</label>
-                  </div>
-                }
-                <div class="text-center">
-                  <button class="btn btn-deep-purple" onClick={this.submit}>Login</button>
-                </div>
+              <div class="md-form">
+                <i class="fa fa-envelope prefix"></i>
+                <input placeholder="Email" type="text" id="form2" name="email" onChange={this.handleInputChange} class="form-control"></input>
               </div>
 
-            </div>
-          </div>
-        </center>
+              <div class="md-form">
+                <i class="fa fa-lock prefix"></i>
+                <input placeholder="Password" type="password" name="password" id="form4" onChange={this.handleInputChange} class="form-control"></input>
+              </div>
 
-      </div >
+              {this.state.showError &&
+                <div style={{ textAlign: "center" }}>
+                  <label style={{ color: "red" }}>{this.state.ErrorValue}</label>
+                </div>
+              }
+              <div class="text-center">
+                <button class="btn btn-primary" onClick={this.submit}>Login</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </center>
+
+
 
 
 
