@@ -6,7 +6,6 @@ import Moment from 'react-moment';
 import "./cards.css";
 import "./style.css";
 import "./div.css";
-import DatePicker from "react-datepicker";
 import moment from 'moment'
 import { Link } from 'react-router-dom'
 import "react-datepicker/dist/react-datepicker.css";
@@ -16,12 +15,13 @@ class DashboardPage extends React.Component {
   constructor(props) {
     super(props);
     this.handleDateChange = this.handleDateChange.bind(this);
-    this.handleDateChange2 = this.handleDateChange2.bind(this);
+    // this.handleDateChange2 = this.handleDateChange2.bind(this);
+    this.handleTimeChange = this.handleTimeChange.bind(this);
     this.state = {
       showError: false, dataError: "",
       showFlights: false, selectedAirport: "", selectedCode: "", endDate: "",
-      startDate: "", unixStart: 0, unixEnd: 0,
-      data: { type: "", startDate: new Date(), endDate: new Date() },
+      startDate: "", unixStart: 0, unixEnd: 0, selectedTime: 0,
+      data: { type: "arrival", time: 0 },
       dataForView: [],
       form_data: [
         {
@@ -140,7 +140,7 @@ class DashboardPage extends React.Component {
       let airport = cards[i].airports.name;
       let code = cards[i].airports.code;
       nodes.push(
-        <center>
+        <center key={i}>
           <div className={`w3-col w3-blue card card-1 w3-padding`} style={{ width: "500px" }} key={i}>
             <h2 className="w3-large">{header}</h2>
 
@@ -201,30 +201,41 @@ class DashboardPage extends React.Component {
         })
     });
   }
-  handleDateChange2(date) {
-    const FLIGHTS = "flights";
-    this.setState({
-      endDate: date,
-      data: {
-        ...this.state.data,
-        endDate: date
-      },
-      unixEnd: moment(date).toDate().getTime()
 
-    }, () => {
-      const response = instance.get(`${FLIGHTS}/${this.state.data.type}`, { params: { airport: this.state.selectedCode, begin: this.state.unixStart, end: this.state.unixEnd } });
-      response.then((res) => {
-        this.setState({ dataForView: res.data }, () => {
-        })
-        console.log("response", this.state.dataForView)
-      })
-        .catch((err) => {
-          console.log("error", err)
-        })
-    });
-  }
+  // handleDateChange2(date) {
+  //   const FLIGHTS = "flights";
+  //   this.setState({
+  //     endDate: date,
+  //     data: {
+  //       ...this.state.data,
+  //       endDate: date
+  //     },
+  //     unixEnd: moment(date).toDate().getTime()
+
+  //   }, () => {
+  //     const response = instance.get(`${FLIGHTS}/${this.state.data.type}`, { params: { airport: this.state.selectedCode, begin: this.state.unixStart, end: this.state.unixEnd } });
+  //     response.then((res) => {
+  //       this.setState({ dataForView: res.data }, () => {
+  //       })
+  //       console.log("response", this.state.dataForView)
+  //     })
+  //       .catch((err) => {
+  //         console.log("error", err)
+  //       })
+  //   });
+  // }
 
   handleSelectChange = (e) => {
+
+    this.setState({ data: { ...this.state.data, [e.target.name]: e.target.value } }, () => {
+      console.log("type:", this.state.data)
+    })
+
+
+  }
+
+  handleTimeChange = (e) => {
+
     const ARRIVAL = "arrival";
     const DEPARTURE = "departure";
     const FLIGHTS = "flights";
@@ -232,7 +243,12 @@ class DashboardPage extends React.Component {
       data: { ...this.state.data, [e.target.name]: e.target.value }
     }, () => {
       console.log("dtaa", this.state.data)
-      const response = instance.get(`${FLIGHTS}/${this.state.data.type}`, { params: { airport: this.state.selectedCode, begin: 1517227200, end: 1517230800 } });
+
+      // console.log("test", moment().subtract(120, 'seconds').t
+      let calculated = moment().subtract(this.state.data.time * 60, 'seconds').unix()
+      let actual = moment().unix()
+
+      const response = instance.get(`${FLIGHTS}/${this.state.data.type}`, { params: { airport: this.state.selectedCode, begin: calculated, end: actual } });
       response.then((res) => {
         this.setState({ dataForView: res.data }, () => {
         })
@@ -240,43 +256,50 @@ class DashboardPage extends React.Component {
       })
         .catch((err) => {
           console.log("error", err)
+          if (err) {
+            this.setState({ dataForView: [] })
+          }
         })
     })
-
 
   }
 
   renderFlights = (dataForView) => {
 
     let nodes = [];
-    for (let i = 0; i < dataForView.length; i++) {
-      let icao = dataForView[i].icao24;
-      let firstSeen = dataForView[i].firstSeen;
-      let lastSeen = dataForView[i].lastSeen;
-      let estDepartureAirpotHorizDistance = dataForView[i].estDepartureAirpotHorizDistance;
-      let estArrivalAirportHorizDistance = dataForView[i].estArrivalAirportHorizDistance;
+    if (dataForView.length > 0) {
+      for (let i = 0; i < dataForView.length; i++) {
+        let icao = dataForView[i].icao24;
+        // let firstSeen = dataForView[i].firstSeen;
+        // let lastSeen = dataForView[i].lastSeen;
+        // let estDepartureAirpotHorizDistance = dataForView[i].estDepartureAirpotHorizDistance;
+        // let estArrivalAirportHorizDistance = dataForView[i].estArrivalAirportHorizDistance;
+        nodes.push(
+          <div>
+            <label>ICAO Number: {icao}</label>
+
+          </div>
+        );
+      }
+    } else {
       nodes.push(
         <div>
-          <label>ICAO Number: {icao}</label>
-          <label>First Seen: <Moment unix>{firstSeen}</Moment></label>
-          <label>Last Seen: <Moment unix>{lastSeen}</Moment></label>
-          <label>Departure Airport Horizontal Distance: {estDepartureAirpotHorizDistance}</label>
-          <label>Arrival Airport Horizontal Distance: {estArrivalAirportHorizDistance} meters</label>
-
+          <label>No Records Found</label>
         </div>
-      );
+      )
     }
 
     return nodes;
   }
 
   render() {
+    console.log("dataforview", this.state.dataForView)
     return (
       <React.Fragment>
         {/* <BreadcrumSection /> */}
         <div class="w3-top">
           <div class="w3-bar w3-black">
-            <Link to={"/"} class="w3-bar-item w3-button">Wellcome to Opensky</Link>
+            <Link to={"/"} className="w3-bar-item w3-button">Welcome to Opensky</Link>
           </div>
         </div>
         <br />
@@ -301,20 +324,27 @@ class DashboardPage extends React.Component {
                 <div className="row">
 
                   <div className="col-md-6">
-                    Select Start Date
-                      <DatePicker
-                      selected={this.state.data.startDate}
-                      onChange={this.handleDateChange} //only when value has changed
+                    Select flights in the last x-minutes
 
-                    />
+                    <select className="form-control" style={{ width: "29rem" }} name="time" id="time" value={this.state.data.time} onChange={this.handleTimeChange}>
+                      <option value={1}>1mins</option>
+                      <option value={5}>5mins</option>
+                      <option value={15}>15mins</option>
+                      <option value={20}>20mins</option>
+                      <option value={25}>25mins</option>
+                      <option value={30}>30mins</option>
+                      <option value={35}>35mins</option>
+                      <option value={40}>40mins</option>
+                      <option value={45}>45mins</option>
+                      <option value={50}>50mins</option>
+                      <option value={55}>55mins</option>
+                      <option value={60}>60mins</option>
+                    </select>
+                    <br />
                   </div>
 
                   <div className="col-md-6">
-                    Select End Date
-                    <DatePicker
-                      selected={this.state.data.endDate}
-                      onChange={this.handleDateChange2} //only when value has changed
-                    />
+
                   </div>
                 </div>
 
