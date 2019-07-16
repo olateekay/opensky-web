@@ -270,13 +270,18 @@ class DashboardPage extends React.Component {
     if (dataForView.length > 0) {
       for (let i = 0; i < dataForView.length; i++) {
         let icao = dataForView[i].icao24;
-        // let firstSeen = dataForView[i].firstSeen;
-        // let lastSeen = dataForView[i].lastSeen;
-        // let estDepartureAirpotHorizDistance = dataForView[i].estDepartureAirpotHorizDistance;
-        // let estArrivalAirportHorizDistance = dataForView[i].estArrivalAirportHorizDistance;
+        let firstSeen = dataForView[i].firstSeen;
+        let lastSeen = dataForView[i].lastSeen;
+        let estDepartureAirpotHorizDistance = dataForView[i].estDepartureAirpotHorizDistance;
+        let estArrivalAirportHorizDistance = dataForView[i].estArrivalAirportHorizDistance;
         nodes.push(
           <div>
             <label>ICAO Number: {icao}</label>
+            <label>First Seen: {firstSeen}</label>
+            <label>Last Seen: {lastSeen}</label>
+            <label>estDepartureAirpotHorizDistance: {estDepartureAirpotHorizDistance}</label>
+            <label>estArrivalAirportHorizDistance: {estArrivalAirportHorizDistance}</label>
+
 
           </div>
         );
