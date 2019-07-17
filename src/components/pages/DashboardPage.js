@@ -276,11 +276,11 @@ class DashboardPage extends React.Component {
         let estArrivalAirportHorizDistance = dataForView[i].estArrivalAirportHorizDistance;
         nodes.push(
           <div>
-            <label>ICAO Number: {icao}</label>
-            <label>First Seen: {firstSeen}</label>
-            <label>Last Seen: {lastSeen}</label>
-            <label>estDepartureAirpotHorizDistance: {estDepartureAirpotHorizDistance}</label>
-            <label>estArrivalAirportHorizDistance: {estArrivalAirportHorizDistance}</label>
+            <label>ICAO Number: {icao}</label> <br />
+            <label>First Seen: {firstSeen}</label> <br />
+            <label>Last Seen: {lastSeen}</label> <br />
+            <label>estDepartureAirpotHorizDistance: {estDepartureAirpotHorizDistance}</label> <br />
+            <label>estArrivalAirportHorizDistance: {estArrivalAirportHorizDistance}</label> <br />
 
 
           </div>
